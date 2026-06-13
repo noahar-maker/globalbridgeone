@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact GlobalBridgeOne - reach us by phone, WhatsApp, or email. We operate across Africa, the Middle East, Europe, and Turkey.">
+  <title>Contact - GlobalBridgeOne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; color: #0C2340; background: #fff; overflow-x: hidden; }
+    a { text-decoration: none; }
+    img { display: block; }
+    img:not(.nav-logo-img):not(.footer-logo-img) { max-width: 100%; }
+
+    .skip-nav {
+      position: absolute; top: -100%; left: 16px;
+      background: #0EA5E9; color: #fff; padding: 8px 20px;
+      border-radius: 4px; font-weight: 600; font-size: 14px;
+      z-index: 999; transition: top .2s;
+    }
+    .skip-nav:focus { top: 16px; }
+
+    :root {
+      --navy: #0C2340; --navy2: #0D3460; --navy3: #0A4A7A; --deep: #081C35;
+      --teal: #0EA5E9; --teal2: #38BDF8; --teal3: #7DD3FC;
+      --bg-light: #F0F9FF; --muted: #4B6280; --border: #BAE6FD;
+      --radius: 16px; --shadow-lg: 0 12px 40px rgba(14,165,233,.18);
+    }
+    :focus-visible { outline: 2px solid var(--teal2); outline-offset: 3px; border-radius: 4px; }
+
+    /* ══ NAV ══ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(12,35,64,.96); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(14,165,233,.15);
+      height: 100px; transition: height .35s ease;
+      display: flex; align-items: center;
+    }
+    .nav.scrolled { height: 68px; }
+    .nav-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 40px;
+      height: 100%;
+      width: 100%;
+    }
+    .nav-brand { display: inline-flex; align-items: center; gap: 8px; background: #fff; border-radius: 10px; padding: 8px; line-height: 1; justify-self: start; max-height: 80%; }
+    .nav-logo-img { height: 60px; width: auto; max-width: none; display: block; }
+    .nav-logo-text { font-size: 15px; font-weight: 800; color: #1a2a4a; letter-spacing: -.01em; white-space: nowrap; }
+    .nav-logo-text span { color: #1a6fdb; }
+    .nav.scrolled .nav-brand { padding: 6px; }
+    .nav.scrolled .nav-logo-img { height: 50px; display: block; }
+    .nav.scrolled .nav-logo-text { font-size: 14px; }
+    .nav-links { display: flex; gap: 36px; justify-self: center; grid-column: 2; }
+    .nav-links a { color: rgba(255,255,255,.6); font-size: 14px; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a[aria-current="page"] { color: var(--teal2); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--teal), #0284C7);
+      color: #fff; padding: 10px 24px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; box-shadow: 0 4px 14px rgba(14,165,233,.35);
+      transition: opacity .2s, transform .15s;
+      justify-self: end; grid-column: 3;
+    }
+    .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+    .nav-mobile-btn { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 4px; grid-column: 3; justify-self: end; }
+
+    /* ══ PAGE HERO ══ */
+    .page-hero {
+      margin-top: 100px;
+      background: linear-gradient(150deg, #0C2340 0%, #0D3460 55%, #0A4A7A 100%);
+      padding: 72px 0 64px; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; top: -80px; right: -60px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; position: relative; }
+    .page-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+    .page-h1 { font-size: 48px; font-weight: 800; color: #fff; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 18px; }
+    .page-h1 .accent { color: var(--teal2); }
+    .page-sub { font-size: 17px; color: rgba(255,255,255,.55); line-height: 1.7; max-width: 520px; }
+
+    /* ══ CONTACT BODY ══ */
+    .contact-body { padding: 80px 0 100px; background: var(--bg-light); }
+    .contact-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+    }
+
+    /* Left - contact cards */
+    .contact-cards { display: flex; flex-direction: column; gap: 16px; }
+
+    .contact-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 32px;
+      display: flex; align-items: center; gap: 20px;
+      transition: box-shadow .25s, transform .2s, border-color .2s;
+      cursor: pointer;
+    }
+    .contact-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+      border-color: var(--teal);
+    }
+    .contact-card-icon {
+      width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-card-icon.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+    .contact-card-icon.email    { background: linear-gradient(135deg, var(--teal), #0284C7); }
+    .contact-card-icon.phone    { background: linear-gradient(135deg, #0A4A7A, #0D3460); border: 1px solid rgba(14,165,233,.2); }
+
+
+    .contact-card-body { flex: 1; }
+    .contact-card-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 5px;
+    }
+    .contact-card-value {
+      font-size: 17px; font-weight: 700; color: var(--navy); line-height: 1.3;
+    }
+    .contact-card-hint {
+      font-size: 12px; color: var(--muted); margin-top: 3px;
+    }
+    .contact-card-arrow {
+      color: var(--teal); font-size: 20px; opacity: .5;
+      transition: opacity .2s, transform .2s;
+    }
+    .contact-card:hover .contact-card-arrow { opacity: 1; transform: translateX(4px); }
+
+    /* Right - info block */
+    .contact-info-block { padding-top: 8px; }
+    .contact-info-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 18px;
+    }
+    .contact-info-heading {
+      font-size: 32px; font-weight: 800; color: var(--navy);
+      letter-spacing: -.025em; line-height: 1.2; margin-bottom: 18px;
+    }
+    .contact-info-text {
+      font-size: 16px; color: var(--muted); line-height: 1.78; margin-bottom: 36px;
+    }
+
+    .regions-title {
+      font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 16px;
+    }
+    .regions-list { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+    .region-pill {
+      display: flex; align-items: center; gap: 8px;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 50px; padding: 8px 16px;
+      font-size: 14px; font-weight: 600; color: var(--navy2);
+    }
+    .region-pill::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--teal); flex-shrink: 0;
+    }
+
+    .contact-tagline {
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      border-radius: var(--radius); padding: 28px 32px;
+      border-left: 3px solid var(--teal);
+    }
+    .contact-tagline p {
+      font-size: 15px; font-weight: 600; color: rgba(255,255,255,.85);
+      line-height: 1.7; font-style: italic;
+    }
+
+    /* ══ FOOTER ══ */
+    footer { background: var(--navy); padding: 60px 0 32px; border-top: 1px solid rgba(14,165,233,.12); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-logo-box { display: inline-flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 28px; }
+    .footer-logo-img { width: 200px; height: auto; display: block; }
+    .footer-desc { font-size: 14px; color: rgba(255,255,255,.4); line-height: 1.75; }
+    .footer-col-title { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.45); transition: color .15s; }
+    .footer-links a:hover { color: var(--teal2); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: rgba(255,255,255,.3); flex-wrap: wrap; gap: 12px;
+    }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,.3); transition: color .15s; }
+    .footer-legal a:hover { color: var(--teal3); }
+
+    /* ══ ANIMATIONS ══ */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══ MOBILE ══ */
+    @media (max-width: 900px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact-info-block { order: -1; }
+      .nav-links { display: none; }
+      .nav-mobile-btn { display: block; }
+    }
+    @media (max-width: 560px) {
+      .page-hero-inner, .contact-inner, .footer-inner { padding: 0 20px; }
+      .page-h1 { font-size: 32px; }
+      .contact-card { padding: 20px 22px; }
+      .contact-card-value { font-size: 15px; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 767px) { .nav-cta { display: none; } }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-nav">Skip to main content</a>
+
+<!-- ══ NAV ══ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="GlobalBridgeOne - Home">
+      <img src="logo_header_icon.png" alt="" class="nav-logo-img">
+      <span class="nav-logo-text" aria-hidden="true">global<span>bridge</span>one</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta" aria-current="page">Get in Touch</a>
+    <button class="nav-mobile-btn" aria-label="Open navigation menu" aria-expanded="false">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Get in Touch</div>
+    <h1 class="page-h1">Let's Talk About<br><span class="accent">Your Project</span></h1>
+    <p class="page-sub">
+      Ready to start? Have a question? Reach out directly - we respond fast.
+    </p>
+  </div>
+</header>
+
+<main id="main">
+<div class="contact-body">
+  <div class="contact-inner">
+
+    <!-- Contact cards -->
+    <div class="contact-cards">
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/972547700734" target="_blank" rel="noopener"
+         class="contact-card fade-in" aria-label="Message on WhatsApp: +972 54 770 0734">
+        <div class="contact-card-icon whatsapp" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </div>
+        <div class="contact-card-body">
+          <div class="contact-card-label">WhatsApp</div>
+          <div class="contact-card-value">+972 54 770 0734</div>
+          <div class="contact-card-hint">Chat with us directly</div>
+        </div>
+        <span class="contact-card-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:info@globalbridgeone.com"
+         class="contact-card fade-in" aria-label="Send email to info@globalbridgeone.com">
+        <div class="contact-card-icon email" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <polyline points="2,4 12,13 22,4"/>
+          </svg>
+        </div>
+        <div class="contact-card-body">
+          <div class="contact-card-label">Email</div>
+          <div class="contact-card-value">info@globalbridgeone.com</div>
+          <div class="contact-card-hint">We'll reply within one business day</div>
+        </div>
+        <span class="contact-card-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <!-- Phone -->
+      <a href="https://wa.me/972547700734" target="_blank" rel="noopener"
+         class="contact-card fade-in" aria-label="Message on WhatsApp: +972 54 770 0734">
+        <div class="contact-card-icon phone" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.09 9.17a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.35a16 16 0 006.56 6.56l1.22-1.22a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </div>
+        <div class="contact-card-body">
+          <div class="contact-card-label">Phone</div>
+          <div class="contact-card-value">+972 54 770 0734</div>
+          <div class="contact-card-hint">Available Sun–Thu, 9:00–18:00 (IL)</div>
+        </div>
+        <span class="contact-card-arrow" aria-hidden="true">→</span>
+      </a>
+
+    </div>
+
+    <!-- Info block -->
+    <div class="contact-info-block fade-in">
+      <div class="contact-info-eyebrow">Where We Operate</div>
+      <h2 class="contact-info-heading">Global Reach,<br>Local Expertise</h2>
+      <p class="contact-info-text">
+        GlobalBridgeOne delivers mission-critical technology solutions across four regions.
+        Whether you're launching a national command center or upgrading an enterprise AV
+        environment - we're on the ground where you need us.
+      </p>
+
+      <div class="regions-title">Active Regions</div>
+      <div class="regions-list">
+        <span class="region-pill">Africa</span>
+        <span class="region-pill">Middle East</span>
+        <span class="region-pill">Europe</span>
+        <span class="region-pill">Turkey</span>
+      </div>
+
+      <div class="contact-tagline">
+        <p>"We do not install systems - we build the layer of technology that enables organizations to operate, support, and evolve at every moment."</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-box">
+          <img src="logo_footer.png" alt="GlobalBridgeOne" class="footer-logo-img">
+        </div>
+        <p class="footer-desc">
+          Advanced Technology Solutions. AV &amp; Multimedia, KVM Command Centers,
+          and Smart City Infrastructure.
+        </p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-links">
+          <a href="https://wa.me/972547700734" target="_blank" rel="noopener">+972 54 770 0734</a>
+          <a href="mailto:info@globalbridgeone.com">info@globalbridgeone.com</a>
+          <a href="https://globalbridgeone.com" target="_blank" rel="noopener">globalbridgeone.com</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-links">
+          <a href="accessibility.html">Accessibility Statement</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 GlobalBridgeOne. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="accessibility.html">Accessibility</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((el, i) => {
+      if (el.isIntersecting) {
+        setTimeout(() => el.target.classList.add('visible'), i * 80);
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Mobile nav toggle
+  const mobileBtn = document.querySelector('.nav-mobile-btn');
+  const navLinks  = document.querySelector('.nav-links');
+  let menuOpen = false;
+
+  function closeMenu() {
+    menuOpen = false;
+    mobileBtn.setAttribute('aria-expanded', false);
+    mobileBtn.setAttribute('aria-label', 'Open navigation menu');
+    mobileBtn.innerHTML = '&#9776;';
+    navLinks.style.display = 'none';
+  }
+
+  mobileBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuOpen = !menuOpen;
+    mobileBtn.setAttribute('aria-expanded', menuOpen);
+    mobileBtn.setAttribute('aria-label', menuOpen ? 'Close navigation menu' : 'Open navigation menu');
+    mobileBtn.innerHTML = menuOpen ? '&#10005;' : '&#9776;';
+    Object.assign(navLinks.style, menuOpen ? {
+      display: 'flex', flexDirection: 'column',
+      position: 'absolute', top: '100%', left: '0', right: '0', width: '100%',
+      background: 'rgba(12,35,64,.98)',
+      padding: '20px 48px', gap: '18px', zIndex: '9999',
+      borderBottom: '1px solid rgba(14,165,233,.2)'
+    } : { display: 'none' });
+  });
+
+  navLinks?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  document.addEventListener('click', (e) => {
+    if (menuOpen && !navLinks.contains(e.target) && !mobileBtn.contains(e.target)) closeMenu();
+  });
+</script>
+
+</body>
+</html>

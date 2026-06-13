@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GlobalBridgeOne delivers mission-critical technology solutions - AV systems, KVM command centers, and intelligent analytics for government, defense, and enterprise.">
+  <title>GlobalBridgeOne - Mission Critical Technology Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; color: #0C2340; background: #fff; overflow-x: hidden; }
+    a { text-decoration: none; }
+    img { display: block; }
+    img:not(.nav-logo-img):not(.footer-logo-img) { max-width: 100%; }
+
+    /* ── Skip nav (accessibility) ── */
+    .skip-nav {
+      position: absolute; top: -100%; left: 16px;
+      background: #0EA5E9; color: #fff;
+      padding: 8px 20px; border-radius: 4px; font-weight: 600; font-size: 14px;
+      z-index: 999; transition: top .2s;
+    }
+    .skip-nav:focus { top: 16px; }
+
+    /* ── Variables ── */
+    :root {
+      --navy:    #0C2340;
+      --navy2:   #0D3460;
+      --navy3:   #0A4A7A;
+      --deep:    #081C35;
+      --teal:    #0EA5E9;
+      --teal2:   #38BDF8;
+      --teal3:   #7DD3FC;
+      --bg-light:#F0F9FF;
+      --muted:   #4B6280;
+      --border:  #BAE6FD;
+      --radius:  16px;
+      --shadow:  0 4px 24px rgba(14,165,233,.12);
+      --shadow-lg: 0 12px 40px rgba(14,165,233,.18);
+    }
+
+    /* ── Focus styles (accessibility) ── */
+    :focus-visible {
+      outline: 2px solid var(--teal2);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ── Container ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+    /* ════════════════ NAV ════════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(12,35,64,.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(14,165,233,.15);
+      height: 100px;
+      transition: height .35s ease;
+      display: flex; align-items: center;
+    }
+    .nav.scrolled { height: 68px; }
+
+    .nav-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 40px;
+      height: 100%;
+      width: 100%;
+    }
+    /* Logo: icon + text in white rounded box */
+    .nav-brand {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; border-radius: 10px;
+      padding: 8px; line-height: 1;
+      justify-self: start;
+      max-height: 80%;
+    }
+    .nav-logo-img {
+      height: 60px; width: auto; max-width: none; display: block;
+    }
+    .nav-logo-text {
+      font-size: 15px; font-weight: 800; color: #1a2a4a;
+      letter-spacing: -.01em; white-space: nowrap;
+    }
+    .nav-logo-text span { color: #1a6fdb; }
+    /* Scrolled: shrink box slightly */
+    .nav.scrolled .nav-brand { padding: 6px; }
+    .nav.scrolled .nav-logo-img { height: 50px; display: block; }
+    .nav.scrolled .nav-logo-text { font-size: 14px; }
+
+    .nav-links { display: flex; gap: 36px; justify-self: center; grid-column: 2; }
+    .nav-links a {
+      color: rgba(255,255,255,.6); font-size: 14px; font-weight: 500;
+      transition: color .15s; letter-spacing: .01em;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a[aria-current="page"] { color: var(--teal2); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--teal), #0284C7);
+      color: #fff; padding: 10px 24px; border-radius: 50px;
+      font-size: 13px; font-weight: 600;
+      box-shadow: 0 4px 14px rgba(14,165,233,.35);
+      transition: opacity .2s, transform .15s;
+      justify-self: end; grid-column: 3;
+    }
+    .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+    .nav-mobile-btn {
+      display: none; background: none; border: none;
+      color: #fff; font-size: 24px; cursor: pointer; padding: 4px; line-height: 1;
+      grid-column: 3; justify-self: end;
+    }
+
+    /* ════════════════ TICKER ════════════════ */
+    .ticker {
+      margin-top: 100px;
+      background: rgba(14,165,233,.07);
+      border-bottom: 1px solid rgba(14,165,233,.15);
+      overflow: hidden; height: 40px;
+      display: flex; align-items: center;
+    }
+    .ticker-track {
+      display: flex; white-space: nowrap;
+      animation: tickerScroll 32s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 0 28px;
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--teal3);
+    }
+    .t-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+
+    /* ════════════════ HERO ════════════════ */
+    .hero {
+      background: linear-gradient(150deg, #0C2340 0%, #0D3460 50%, #0A4A7A 100%);
+      padding: 96px 0 88px;
+      position: relative; overflow: hidden;
+      min-height: 560px; display: flex; align-items: center;
+    }
+    .hero-orb1 {
+      position: absolute; top: -120px; right: -80px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,.22) 0%, transparent 65%);
+      pointer-events: none; aria-hidden: true;
+    }
+    .hero-orb2 {
+      position: absolute; bottom: -80px; left: -60px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(56,189,248,.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 1200px; margin: 0 auto; padding: 0 48px;
+      display: grid; grid-template-columns: 1fr 280px; gap: 60px; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(14,165,233,.15); border: 1px solid rgba(14,165,233,.3);
+      color: var(--teal3); padding: 6px 18px; border-radius: 50px;
+      font-size: 12px; font-weight: 600; margin-bottom: 28px;
+    }
+    .hero-badge::before { content: '●'; font-size: 7px; color: var(--teal); }
+    .hero-h1 {
+      font-size: 56px; font-weight: 800; color: #fff;
+      line-height: 1.08; margin-bottom: 24px; letter-spacing: -.03em;
+    }
+    .hero-h1 .accent { color: var(--teal2); }
+    .hero-sub {
+      font-size: 18px; color: rgba(255,255,255,.55);
+      line-height: 1.75; max-width: 520px; margin-bottom: 40px;
+    }
+    .hero-btns { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal), #0284C7);
+      color: #fff; padding: 15px 34px; border-radius: 50px;
+      font-size: 15px; font-weight: 600;
+      box-shadow: 0 6px 22px rgba(14,165,233,.4);
+      transition: opacity .2s, transform .15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: .9; transform: translateY(-2px); }
+    .btn-ghost {
+      color: rgba(255,255,255,.6); font-size: 15px; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color .15s;
+    }
+    .btn-ghost:hover { color: #fff; }
+
+    /* Radar */
+    .hero-radar {
+      width: 260px; height: 260px;
+      opacity: .32; position: relative; flex-shrink: 0;
+    }
+    .radar-ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(14,165,233,.7);
+    }
+    .radar-ring:nth-child(1) { inset: 0; }
+    .radar-ring:nth-child(2) { inset: 20%; }
+    .radar-ring:nth-child(3) { inset: 40%; }
+    .radar-cross { position: absolute; background: rgba(14,165,233,.35); }
+    .radar-cross.h { width: 100%; height: 1px; top: 50%; left: 0; }
+    .radar-cross.v { width: 1px; height: 100%; left: 50%; top: 0; }
+    .radar-sweep {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(14,165,233,.55) 0deg, rgba(14,165,233,.08) 55deg, transparent 55deg);
+      animation: radarSpin 3.5s linear infinite;
+    }
+    @keyframes radarSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .radar-dot {
+      position: absolute; width: 6px; height: 6px;
+      background: var(--teal2); border-radius: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .radar-dot::after {
+      content: ''; position: absolute; inset: -5px; border-radius: 50%;
+      border: 1.5px solid var(--teal2); opacity: 0;
+      animation: rdPing 2.4s ease-out infinite;
+    }
+    .rd1 { top: 30%; left: 65%; } .rd1::after { animation-delay: 0s; }
+    .rd2 { top: 62%; left: 36%; } .rd2::after { animation-delay: .9s; }
+    .rd3 { top: 44%; left: 75%; } .rd3::after { animation-delay: 1.8s; }
+    @keyframes rdPing { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(4); } }
+
+    /* ════════════════ STATS ════════════════ */
+    .stats { background: var(--deep); border-top: 1px solid rgba(14,165,233,.12); }
+    .stats-inner {
+      max-width: 1200px; margin: 0 auto; padding: 44px 48px;
+      display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
+      align-items: center; text-align: center;
+    }
+    .stat-divider { background: rgba(255,255,255,.08); height: 48px; }
+    .stat-num {
+      font-size: 48px; font-weight: 800; color: var(--teal2);
+      line-height: 1; letter-spacing: -.025em;
+    }
+    .stat-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: 8px;
+    }
+
+    /* ════════════════ SECTION HELPERS ════════════════ */
+    .section-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+    }
+    .section-h2 {
+      font-size: 40px; font-weight: 800; color: var(--navy);
+      margin-bottom: 12px; letter-spacing: -.025em; line-height: 1.15;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--muted); max-width: 500px;
+      line-height: 1.7; margin-bottom: 56px;
+    }
+
+    /* ════════════════ SERVICES ════════════════ */
+    .services { background: var(--bg-light); padding: 100px 0; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-5px); }
+    .service-card-img { width: 100%; height: 192px; object-fit: cover; }
+    .service-card-body { padding: 28px 26px 32px; }
+    .service-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, #E0F2FE, #BAE6FD);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .service-card-title {
+      font-size: 17px; font-weight: 700; color: var(--navy);
+      margin-bottom: 10px; line-height: 1.35;
+    }
+    .service-card-text { font-size: 14px; color: var(--muted); line-height: 1.75; }
+    .service-card-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 18px; font-size: 14px; font-weight: 600;
+      color: var(--teal); transition: gap .2s;
+    }
+    .service-card-link:hover { gap: 9px; }
+
+    /* ════════════════ PROCESS ════════════════ */
+    .process { background: #fff; padding: 100px 0; position: relative; overflow: hidden; }
+    /* Globe watermark - fills section like a background */
+    .process::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%; max-width: 860px;
+      aspect-ratio: 1 / 1;
+      background: url('logo_icon.png') center/contain no-repeat;
+      filter: grayscale(1) brightness(0);
+      opacity: 0.06;
+      pointer-events: none;
+    }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+      margin-top: 56px; position: relative;
+    }
+    .process-grid::before {
+      content: '';
+      position: absolute; top: 28px; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--teal), var(--border), transparent);
+    }
+    .process-step { padding: 0 20px; text-align: center; }
+    .process-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), #0284C7);
+      color: #fff; font-size: 18px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; position: relative; z-index: 1;
+      box-shadow: 0 4px 16px rgba(14,165,233,.35);
+    }
+    .process-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .process-text  { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ════════════════ ABOUT ════════════════ */
+    .about {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 60%, var(--navy3) 100%);
+      padding: 100px 0;
+    }
+    .about-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .about-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 22px;
+    }
+    .about-quote {
+      font-size: 21px; font-weight: 600; color: #fff; line-height: 1.65;
+      border-left: 3px solid var(--teal); padding-left: 24px; margin-bottom: 12px;
+    }
+    .about-attrib { font-size: 14px; color: rgba(255,255,255,.4); padding-left: 27px; }
+    .values-heading { font-size: 15px; font-weight: 700; color: var(--teal3); margin-bottom: 20px; }
+    .values-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+    .value-pill {
+      background: rgba(14,165,233,.12); border: 1px solid rgba(14,165,233,.25);
+      color: var(--teal3); padding: 8px 18px; border-radius: 50px;
+      font-size: 13px; font-weight: 600;
+    }
+    .about-desc { font-size: 15px; color: rgba(255,255,255,.5); line-height: 1.78; }
+
+    /* ════════════════ SERVICE TAGS ════════════════ */
+    .service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 4px; }
+    .tag {
+      font-size: 11px; font-weight: 600; letter-spacing: .04em;
+      background: var(--bg-light); border: 1px solid var(--border);
+      color: var(--teal); padding: 4px 10px; border-radius: 20px;
+    }
+
+    /* ════════════════ SECTORS / MARKETS ════════════════ */
+    .sectors { background: var(--deep); padding: 100px 0; }
+    .sectors .section-eyebrow { color: var(--teal); }
+    .sectors .section-h2 { color: #fff; }
+    .sectors .section-sub { color: rgba(255,255,255,.5); }
+    .markets-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 16px;
+    }
+    .market-col {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(14,165,233,.15);
+      border-radius: var(--radius); padding: 36px 40px;
+    }
+    .market-header {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+    }
+    .market-icon {
+      width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--teal), #0284C7);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .market-title {
+      font-size: 20px; font-weight: 700; color: #fff;
+    }
+    .market-list {
+      list-style: none; display: flex; flex-direction: column; gap: 14px;
+    }
+    .market-list li {
+      font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.5;
+      padding-left: 18px; position: relative;
+    }
+    .market-list li::before {
+      content: ''; position: absolute; left: 0; top: 8px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal);
+    }
+
+    /* ════════════════ CTA ════════════════ */
+    .cta-section {
+      background:
+        linear-gradient(160deg, rgba(8,28,53,.80) 0%, rgba(10,74,122,.68) 55%, rgba(8,28,53,.80) 100%),
+        url('img-command-collage.png') center/cover no-repeat;
+      padding: 88px 0; text-align: center;
+    }
+    .cta-section h2 {
+      font-size: 38px; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -.02em;
+    }
+    .cta-section p { font-size: 18px; color: rgba(255,255,255,.8); margin-bottom: 40px; }
+    .btn-white {
+      background: #fff; color: var(--teal);
+      padding: 16px 44px; border-radius: 50px;
+      font-size: 16px; font-weight: 700;
+      box-shadow: 0 6px 24px rgba(0,0,0,.15);
+      transition: transform .15s, box-shadow .15s;
+      display: inline-block;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+
+    /* ════════════════ FOOTER ════════════════ */
+    footer {
+      background: var(--navy);
+      padding: 60px 0 32px;
+      border-top: 1px solid rgba(14,165,233,.12);
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px;
+    }
+    .footer-logo-box { display: inline-flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 28px; }
+    .footer-logo-img { width: 200px; height: auto; display: block; }
+    .footer-desc { font-size: 14px; color: rgba(255,255,255,.4); line-height: 1.75; }
+    .footer-col-title {
+      font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 18px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.45); transition: color .15s; }
+    .footer-links a:hover { color: var(--teal2); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: rgba(255,255,255,.3); flex-wrap: wrap; gap: 12px;
+    }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,.3); transition: color .15s; }
+    .footer-legal a:hover { color: var(--teal3); }
+
+    /* ════════════════ ANIMATIONS ════════════════ */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════ MOBILE ════════════════ */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-radar { display: none; }
+      .hero-h1 { font-size: 40px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .markets-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .process-grid::before { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 44px; }
+      .markets-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .stats-inner { grid-template-columns: 1fr 1fr; gap: 32px 0; }
+      .stat-divider { display: none; }
+      .nav-links { display: none; }
+      .nav-mobile-btn { display: block; }
+    }
+    @media (max-width: 560px) {
+      .container, .hero-inner, .about-inner, .footer-inner { padding: 0 20px; }
+      .stats-inner { padding: 36px 20px; }
+      .hero-h1 { font-size: 32px; }
+      .section-h2 { font-size: 28px; }
+      .sectors-grid, .process-grid, .markets-grid { grid-template-columns: 1fr; }
+      .services, .process, .about, .sectors, .cta-section { padding: 64px 0; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 767px) { .nav-cta { display: none; } }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-nav">Skip to main content</a>
+
+<!-- ══ NAV ══ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <img src="logo_header_icon.png" alt="GlobalBridgeOne - Home" class="nav-logo-img">
+      <span class="nav-logo-text" aria-hidden="true">global<span>bridge</span>one</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Get in Touch</a>
+    <button class="nav-mobile-btn" aria-label="Open navigation menu" aria-expanded="false">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">KVM Systems <span class="t-dot"></span></span>
+    <span class="ticker-item">Border Intelligence <span class="t-dot"></span></span>
+    <span class="ticker-item">AV &amp; Multimedia Solutions <span class="t-dot"></span></span>
+    <span class="ticker-item">National Analytics <span class="t-dot"></span></span>
+    <span class="ticker-item">Control Rooms <span class="t-dot"></span></span>
+    <span class="ticker-item">Smart City Infrastructure <span class="t-dot"></span></span>
+    <span class="ticker-item">Project Consulting <span class="t-dot"></span></span>
+    <span class="ticker-item">Command Centers <span class="t-dot"></span></span>
+    <span class="ticker-item">KVM Systems <span class="t-dot"></span></span>
+    <span class="ticker-item">Border Intelligence <span class="t-dot"></span></span>
+    <span class="ticker-item">AV &amp; Multimedia Solutions <span class="t-dot"></span></span>
+    <span class="ticker-item">National Analytics <span class="t-dot"></span></span>
+    <span class="ticker-item">Control Rooms <span class="t-dot"></span></span>
+    <span class="ticker-item">Smart City Infrastructure <span class="t-dot"></span></span>
+    <span class="ticker-item">Project Consulting <span class="t-dot"></span></span>
+    <span class="ticker-item">Command Centers <span class="t-dot"></span></span>
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<!-- ══ HERO ══ -->
+<section class="hero" aria-label="GlobalBridgeOne - Mission Critical Technology Solutions">
+  <div class="hero-orb1" aria-hidden="true"></div>
+  <div class="hero-orb2" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge" aria-hidden="true">Mission Critical Technology Solutions</div>
+      <h1 class="hero-h1">
+        We Build the Layer<br>of Technology<br>
+        <span class="accent">That Keeps You Running</span>
+      </h1>
+      <p class="hero-sub">
+        Architectural coordination between systems, operations, and people -
+        across communication, security, AV, and command infrastructure.
+      </p>
+      <div class="hero-btns">
+        <a href="services.html" class="btn-primary">Explore Services &rarr;</a>
+        <a href="contact.html" class="btn-ghost">Contact Us &rsaquo;</a>
+      </div>
+    </div>
+    <div class="hero-radar" aria-hidden="true">
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-cross h"></div>
+      <div class="radar-cross v"></div>
+      <div class="radar-sweep"></div>
+      <div class="radar-dot rd1"></div>
+      <div class="radar-dot rd2"></div>
+      <div class="radar-dot rd3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<div class="stats" role="region" aria-label="Company statistics">
+  <div class="stats-inner">
+    <div class="fade-in">
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Projects Delivered</div>
+    </div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="fade-in">
+      <div class="stat-num">15</div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="fade-in">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Countries</div>
+    </div>
+    <div class="stat-divider" aria-hidden="true"></div>
+    <div class="fade-in">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Client Retention</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICES ══ -->
+<section class="services" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-eyebrow fade-in">What We Do</div>
+    <h2 class="section-h2 fade-in" id="services-heading">Our Services</h2>
+    <p class="section-sub fade-in">
+      End-to-end design, planning, and supervision of mission-critical technology environments.
+    </p>
+    <div class="services-grid">
+
+      <!-- Communication -->
+      <article class="service-card fade-in">
+        <img class="service-card-img"
+          src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80"
+          alt="Fiber optic and structured cabling infrastructure">
+        <div class="service-card-body">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12.5C5 12.5 7 8 12 8C17 8 19 12.5 19 12.5" stroke="#0EA5E9" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="M2 10C2 10 5.5 4 12 4C18.5 4 22 10 22 10" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="12" cy="16" r="2" stroke="#0EA5E9" stroke-width="1.7"/>
+              <line x1="12" y1="18" x2="12" y2="21" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Advanced Communication Infrastructure</h3>
+          <p class="service-card-text">Fiber optic networks, structured cabling, and secure communication systems engineered for reliability, speed, and operational continuity.</p>
+          <div class="service-tags">
+            <span class="tag">Fiber optics</span><span class="tag">Networking</span><span class="tag">Secure comms</span>
+          </div>
+          <a href="services.html#comms" class="service-card-link">Learn more &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Security & C2 -->
+      <article class="service-card fade-in">
+        <img class="service-card-img" src="img-soc.png" alt="Global operations command center with operator workstations">
+        <div class="service-card-body">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3L4 6.5V11C4 15.8 7.5 20.2 12 21C16.5 20.2 20 15.8 20 11V6.5L12 3Z" stroke="#0EA5E9" stroke-width="1.7" stroke-linejoin="round"/>
+              <polyline points="8.5,12 11,14.5 15.5,9.5" stroke="#0EA5E9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Security &amp; Command-and-Control Systems</h3>
+          <p class="service-card-text">Integrated surveillance, AI-powered video analytics, emergency management centers, and situational awareness platforms for high-security environments.</p>
+          <div class="service-tags">
+            <span class="tag">AI analytics</span><span class="tag">Video walls</span><span class="tag">KVM</span><span class="tag">SOC / NOC</span>
+          </div>
+          <a href="services.html#security" class="service-card-link">Learn more &rarr;</a>
+        </div>
+      </article>
+
+      <!-- AV -->
+      <article class="service-card fade-in">
+        <img class="service-card-img" src="img-av-room.png" alt="Professional AV boardroom with blue LED lighting">
+        <div class="service-card-body">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2" stroke="#0EA5E9" stroke-width="1.7"/>
+              <line x1="12" y1="17" x2="12" y2="21" stroke="#0EA5E9" stroke-width="1.7" stroke-linecap="round"/>
+              <line x1="8" y1="21" x2="16" y2="21" stroke="#0EA5E9" stroke-width="1.7" stroke-linecap="round"/>
+              <polyline points="6,13 9,8 12,11 15,6 18,9 20,7" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Audio-Visual &amp; Multimedia Systems</h3>
+          <p class="service-card-text">Advanced meeting rooms, hybrid collaboration environments, auditoriums, and digital signage - from concept and design through deployment and operation.</p>
+          <div class="service-tags">
+            <span class="tag">AV-over-IP</span><span class="tag">Hybrid rooms</span><span class="tag">LED walls</span><span class="tag">Digital signage</span>
+          </div>
+          <a href="services.html#av" class="service-card-link">Learn more &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Smart City -->
+      <article class="service-card fade-in">
+        <img class="service-card-img" src="img-border.png" alt="Border surveillance cameras and smart monitoring infrastructure">
+        <div class="service-card-body">
+          <div class="service-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="#0EA5E9" stroke-width="1.7"/>
+              <path d="M2 12H22" stroke="#0EA5E9" stroke-width="1.5"/>
+              <path d="M12 2C10 5.5 9 8.5 9 12C9 15.5 10 18.5 12 22" stroke="#0EA5E9" stroke-width="1.5"/>
+              <path d="M12 2C14 5.5 15 8.5 15 12C15 15.5 14 18.5 12 22" stroke="#0EA5E9" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="service-card-title">Smart City &amp; Urban Intelligence</h3>
+          <p class="service-card-text">Municipal camera networks, AI-driven traffic management, LPR systems, and integrated city operations centers for data-driven urban governance.</p>
+          <div class="service-tags">
+            <span class="tag">600+ cameras</span><span class="tag">LPR</span><span class="tag">Traffic control</span><span class="tag">GIS integration</span>
+          </div>
+          <a href="services.html#smartcity" class="service-card-link">Learn more &rarr;</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section class="process" aria-labelledby="process-heading">
+  <div class="container">
+    <div class="section-eyebrow fade-in">How We Work</div>
+    <h2 class="section-h2 fade-in" id="process-heading">Our Approach</h2>
+    <p class="section-sub fade-in">Every project follows the same four principles - regardless of scale or sector.</p>
+    <div class="process-grid">
+      <div class="process-step fade-in">
+        <div class="process-num" aria-hidden="true">01</div>
+        <h3 class="process-title">Simplicity</h3>
+        <p class="process-text">One unified interface. No complexity. No third-party dependency. Full operational control from day one.</p>
+      </div>
+      <div class="process-step fade-in">
+        <div class="process-num" aria-hidden="true">02</div>
+        <h3 class="process-title">Scalability</h3>
+        <p class="process-text">From a single command post to a national operations network - the system grows with your mission, without rebuilding from scratch.</p>
+      </div>
+      <div class="process-step fade-in">
+        <div class="process-num" aria-hidden="true">03</div>
+        <h3 class="process-title">Redundancy</h3>
+        <p class="process-text">No single point of failure. Continuous operation under any condition - cyber attack, power outage, or physical threat.</p>
+      </div>
+      <div class="process-step fade-in">
+        <div class="process-num" aria-hidden="true">04</div>
+        <h3 class="process-title">End-to-End Ownership</h3>
+        <p class="process-text">From concept and design through commissioning and handover - full technical ownership and accountability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="about" id="about" aria-labelledby="about-heading">
+  <div class="about-inner">
+    <div class="fade-in">
+      <div class="about-eyebrow" id="about-heading">Our Philosophy</div>
+      <blockquote class="about-quote">
+        "Project success is not measured by technology alone. It is measured by delivering a stable,
+        easy-to-operate system that gives the client full operational peace of mind for years to come."
+      </blockquote>
+      <p class="about-attrib">GlobalBridgeOne</p>
+    </div>
+    <div class="fade-in">
+      <div class="values-heading">Core Commitments</div>
+      <div class="values-pills">
+        <span class="value-pill">Reliability</span>
+        <span class="value-pill">Resilience</span>
+        <span class="value-pill">Cybersecurity</span>
+        <span class="value-pill">High Availability</span>
+        <span class="value-pill">Business Continuity</span>
+      </div>
+      <p class="about-desc">
+        We work with the leading products and technologies in the global Pro AV and Security markets,
+        specializing in complex system integration and designing and delivering solutions aligned with each
+        organization's operational character and specific needs.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTORS ══ -->
+<section class="sectors" id="sectors" aria-labelledby="sectors-heading">
+  <div class="container">
+    <div class="section-eyebrow fade-in">Who We Serve</div>
+    <h2 class="section-h2 fade-in" id="sectors-heading">Markets</h2>
+    <p class="section-sub fade-in">Our solutions are deployed across corporate and government sectors worldwide.</p>
+    <div class="markets-grid fade-in">
+
+      <div class="market-col">
+        <div class="market-header">
+          <div class="market-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="18" height="13" rx="2"/>
+              <path d="M7 7V5C7 3.9 7.9 3 9 3H13C14.1 3 15 3.9 15 5V7"/>
+              <line x1="2" y1="13" x2="20" y2="13"/>
+            </svg>
+          </div>
+          <h3 class="market-title">Corporate</h3>
+        </div>
+        <ul class="market-list">
+          <li>Stadiums &amp; sports venues</li>
+          <li>Financial trading floors</li>
+          <li>Data centers &amp; IT departments</li>
+          <li>Media &amp; broadcasting</li>
+          <li>Manufacturing &amp; healthcare</li>
+        </ul>
+      </div>
+
+      <div class="market-col">
+        <div class="market-header">
+          <div class="market-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 2L3 5.5V11C3 15.5 6.5 19.5 11 20.5C15.5 19.5 19 15.5 19 11V5.5L11 2Z"/>
+              <polyline points="7.5,11 10,13.5 14.5,8.5"/>
+            </svg>
+          </div>
+          <h3 class="market-title">Military &amp; Government</h3>
+        </div>
+        <ul class="market-list">
+          <li>Airports, seaports &amp; harbors</li>
+          <li>Railway &amp; transportation</li>
+          <li>Military command centers</li>
+          <li>Government data centers</li>
+          <li>Border security &amp; emergency control rooms</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section" aria-labelledby="cta-heading">
+  <div class="container fade-in">
+    <h2 id="cta-heading">Ready to Start Your Project?</h2>
+    <p>We operate across Africa, the Middle East, Europe, and Turkey.<br>Let's discuss your project.</p>
+    <a href="contact.html" class="btn-white">Get in Touch &rarr;</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-box">
+          <img src="logo_footer.png" alt="GlobalBridgeOne" class="footer-logo-img">
+        </div>
+        <p class="footer-desc">
+          Advanced Technology Solutions. AV &amp; Multimedia, KVM Command Centers,
+          and Smart City Infrastructure.
+        </p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-links">
+          <a href="https://wa.me/972547700734" target="_blank" rel="noopener">+972 54 770 0734</a>
+          <a href="mailto:Barak@GBO.com">Barak@GBO.com</a>
+          <a href="https://globalbridgeone.com" target="_blank" rel="noopener">globalbridgeone.com</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-links">
+          <a href="accessibility.html">Accessibility Statement</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 GlobalBridgeOne. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Scroll fade-in
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+  // ── Nav shrink on scroll + logo swap
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Mobile nav
+  const mobileBtn = document.querySelector('.nav-mobile-btn');
+  const navLinks  = document.querySelector('.nav-links');
+  let open = false;
+
+  function closeMenu() {
+    open = false;
+    mobileBtn.setAttribute('aria-expanded', false);
+    mobileBtn.setAttribute('aria-label', 'Open navigation menu');
+    navLinks.style.display = 'none';
+  }
+
+  mobileBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    open = !open;
+    mobileBtn.setAttribute('aria-expanded', open);
+    mobileBtn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    Object.assign(navLinks.style, open ? {
+      display: 'flex', flexDirection: 'column',
+      position: 'absolute', top: '100%', left: '0', right: '0', width: '100%',
+      background: 'rgba(12,35,64,.98)',
+      padding: '20px 48px', gap: '18px', zIndex: '9999',
+      borderBottom: '1px solid rgba(14,165,233,.2)'
+    } : { display: 'none' });
+  });
+
+  navLinks?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  document.addEventListener('click', (e) => {
+    if (open && !navLinks.contains(e.target) && !mobileBtn.contains(e.target)) closeMenu();
+  });
+</script>
+
+</body>
+</html>

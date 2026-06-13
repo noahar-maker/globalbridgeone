@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GlobalBridgeOne services - Advanced Communication Infrastructure, Security & C2, AV & Multimedia, and Smart City solutions for government and enterprise.">
+  <title>Services - GlobalBridgeOne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; color: #0C2340; background: #fff; overflow-x: hidden; }
+    a { text-decoration: none; }
+    img { display: block; }
+    img:not(.nav-logo-img):not(.footer-logo-img) { max-width: 100%; }
+
+    /* ── Skip nav ── */
+    .skip-nav {
+      position: absolute; top: -100%; left: 16px;
+      background: #0EA5E9; color: #fff;
+      padding: 8px 20px; border-radius: 4px; font-weight: 600; font-size: 14px;
+      z-index: 999; transition: top .2s;
+    }
+    .skip-nav:focus { top: 16px; }
+
+    /* ── Variables ── */
+    :root {
+      --navy:    #0C2340;
+      --navy2:   #0D3460;
+      --navy3:   #0A4A7A;
+      --deep:    #081C35;
+      --teal:    #0EA5E9;
+      --teal2:   #38BDF8;
+      --teal3:   #7DD3FC;
+      --bg-light:#F0F9FF;
+      --muted:   #4B6280;
+      --border:  #BAE6FD;
+      --radius:  16px;
+      --shadow:  0 4px 24px rgba(14,165,233,.12);
+      --shadow-lg: 0 12px 40px rgba(14,165,233,.18);
+    }
+
+    :focus-visible { outline: 2px solid var(--teal2); outline-offset: 3px; border-radius: 4px; }
+
+    /* ── Container ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+    /* ════════════ NAV ════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(12,35,64,.96); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(14,165,233,.15);
+      height: 100px; transition: height .35s ease;
+      display: flex; align-items: center;
+    }
+    .nav.scrolled { height: 68px; }
+    .nav-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 40px;
+      height: 100%;
+      width: 100%;
+    }
+    .nav-brand { display: inline-flex; align-items: center; gap: 8px; background: #fff; border-radius: 10px; padding: 8px; line-height: 1; justify-self: start; max-height: 80%; }
+    .nav-logo-img { height: 60px; width: auto; max-width: none; display: block; }
+    .nav-logo-text { font-size: 15px; font-weight: 800; color: #1a2a4a; letter-spacing: -.01em; white-space: nowrap; }
+    .nav-logo-text span { color: #1a6fdb; }
+    .nav.scrolled .nav-brand { padding: 6px; }
+    .nav.scrolled .nav-logo-img { height: 50px; display: block; }
+    .nav.scrolled .nav-logo-text { font-size: 14px; }
+    .nav-links { display: flex; gap: 36px; justify-self: center; grid-column: 2; }
+    .nav-links a {
+      color: rgba(255,255,255,.6); font-size: 14px; font-weight: 500;
+      transition: color .15s; letter-spacing: .01em;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a[aria-current="page"] { color: var(--teal2); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--teal), #0284C7);
+      color: #fff; padding: 10px 24px; border-radius: 50px;
+      font-size: 13px; font-weight: 600;
+      box-shadow: 0 4px 14px rgba(14,165,233,.35);
+      transition: opacity .2s, transform .15s;
+      justify-self: end; grid-column: 3;
+    }
+    .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+    .nav-mobile-btn {
+      display: none; background: none; border: none;
+      color: #fff; font-size: 24px; cursor: pointer; padding: 4px;
+      grid-column: 3; justify-self: end;
+    }
+
+    /* ════════════ PAGE HERO ════════════ */
+    .page-hero {
+      margin-top: 100px;
+      background: linear-gradient(150deg, #0C2340 0%, #0D3460 55%, #0A4A7A 100%);
+      padding: 72px 0 64px; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -60px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px;
+      position: relative;
+    }
+    .page-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
+    }
+    .page-h1 {
+      font-size: 48px; font-weight: 800; color: #fff;
+      letter-spacing: -.03em; line-height: 1.1; margin-bottom: 18px;
+    }
+    .page-h1 .accent { color: var(--teal2); }
+    .page-sub {
+      font-size: 17px; color: rgba(255,255,255,.55); line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ════════════ SERVICE NAV ANCHORS ════════════ */
+    .services-nav {
+      background: #fff; border-bottom: 1px solid var(--border);
+      position: sticky; top: 68px; z-index: 100;
+      box-shadow: 0 2px 12px rgba(12,35,64,.06);
+    }
+    /* Fade hint on right edge — visible on mobile only */
+    .services-nav::after {
+      content: '';
+      position: absolute; right: 0; top: 0; bottom: 0; width: 64px;
+      background: linear-gradient(to right, transparent, #fff 85%);
+      pointer-events: none; display: none; z-index: 2;
+    }
+    @media (max-width: 960px) { .services-nav::after { display: block; } }
+    .services-nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px;
+      display: flex; gap: 0; overflow-x: auto;
+      scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .services-nav-inner::-webkit-scrollbar { display: none; }
+    .snav-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 18px 24px; font-size: 13px; font-weight: 600;
+      color: var(--muted); white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .snav-link:hover { color: var(--teal); }
+    .snav-link.active { color: var(--teal); border-bottom-color: var(--teal); }
+    .snav-num {
+      font-size: 10px; font-weight: 800; letter-spacing: .06em;
+      color: var(--teal); opacity: .7;
+    }
+
+    /* ════════════ SERVICE SECTIONS ════════════ */
+    .service-section {
+      padding: 96px 0; scroll-margin-top: 130px;
+    }
+    .service-section:nth-child(odd) { background: #fff; }
+    .service-section:nth-child(even) { background: var(--bg-light); }
+
+    .service-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    }
+    .service-section:nth-child(even) .service-inner { direction: rtl; }
+    .service-section:nth-child(even) .service-inner > * { direction: ltr; }
+
+    .service-img-wrap {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 16px 48px rgba(12,35,64,.18);
+      position: relative;
+    }
+    .service-img-wrap img { width: 100%; height: 380px; object-fit: cover; display: block; }
+    .service-img-badge {
+      position: absolute; bottom: 20px; left: 20px;
+      background: rgba(8,28,53,.88); backdrop-filter: blur(8px);
+      border: 1px solid rgba(14,165,233,.25);
+      border-radius: 10px; padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .service-img-badge-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--teal); flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(14,165,233,.25);
+    }
+    .service-img-badge span { font-size: 12px; font-weight: 600; color: var(--teal3); }
+
+    .service-num {
+      font-size: 11px; font-weight: 800; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
+    }
+    .service-title {
+      font-size: 32px; font-weight: 800; color: var(--navy);
+      letter-spacing: -.025em; line-height: 1.2; margin-bottom: 18px;
+    }
+    .service-desc {
+      font-size: 16px; color: var(--muted); line-height: 1.78; margin-bottom: 28px;
+    }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .tag {
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      background: var(--bg-light); border: 1px solid var(--border);
+      color: var(--teal); padding: 5px 12px; border-radius: 20px;
+    }
+    .service-section:nth-child(even) .tag { background: #fff; }
+
+    .capabilities-title {
+      font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 16px;
+    }
+    .capabilities-list {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .cap-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: var(--muted); line-height: 1.55;
+    }
+    .cap-dot {
+      width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--teal), #0284C7);
+      display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+    .cap-dot svg { width: 10px; height: 10px; }
+
+    /* ════════════ CTA ════════════ */
+    .cta-section {
+      background:
+        linear-gradient(160deg, rgba(8,28,53,.80) 0%, rgba(10,74,122,.68) 55%, rgba(8,28,53,.80) 100%),
+        url('img-command-collage.png') center/cover no-repeat;
+      padding: 88px 0; text-align: center;
+    }
+    .cta-section h2 {
+      font-size: 38px; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -.02em;
+    }
+    .cta-section p { font-size: 18px; color: rgba(255,255,255,.8); margin-bottom: 40px; }
+    .btn-white {
+      background: #fff; color: var(--teal);
+      padding: 16px 44px; border-radius: 50px;
+      font-size: 16px; font-weight: 700;
+      box-shadow: 0 6px 24px rgba(0,0,0,.15);
+      transition: transform .15s, box-shadow .15s; display: inline-block;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+
+    /* ════════════ FOOTER ════════════ */
+    footer {
+      background: var(--navy); padding: 60px 0 32px;
+      border-top: 1px solid rgba(14,165,233,.12);
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px;
+    }
+    .footer-logo-box { display: inline-flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 28px; }
+    .footer-logo-img { width: 200px; height: auto; display: block; }
+    .footer-desc { font-size: 14px; color: rgba(255,255,255,.4); line-height: 1.75; }
+    .footer-col-title {
+      font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 18px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.45); transition: color .15s; }
+    .footer-links a:hover { color: var(--teal2); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: rgba(255,255,255,.3); flex-wrap: wrap; gap: 12px;
+    }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: rgba(255,255,255,.3); transition: color .15s; }
+    .footer-legal a:hover { color: var(--teal3); }
+
+    /* ════════════ ANIMATIONS ════════════ */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ════════════ MOBILE ════════════ */
+    @media (max-width: 960px) {
+      .service-inner { grid-template-columns: 1fr; gap: 40px; }
+      .service-section:nth-child(even) .service-inner { direction: ltr; }
+      .service-img-wrap img { height: 280px; }
+      .services-nav-inner { padding: 0 20px; }
+      .snav-link { padding: 16px 16px; font-size: 12px; }
+      .page-h1 { font-size: 34px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .nav-links { display: none; }
+      .nav-mobile-btn { display: block; }
+    }
+    @media (max-width: 560px) {
+      .container, .page-hero-inner, .service-inner, .footer-inner { padding: 0 20px; }
+      .service-section { padding: 64px 0; }
+      .page-h1 { font-size: 28px; }
+      .service-title { font-size: 24px; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 767px) { .nav-cta { display: none; } }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-nav">Skip to main content</a>
+
+<!-- ══ NAV ══ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="GlobalBridgeOne - Home">
+      <img src="logo_header_icon.png" alt="" class="nav-logo-img">
+      <span class="nav-logo-text" aria-hidden="true">global<span>bridge</span>one</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html" aria-current="page">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Get in Touch</a>
+    <button class="nav-mobile-btn" aria-label="Open navigation menu" aria-expanded="false">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">What We Do</div>
+    <h1 class="page-h1">Our <span class="accent">Services</span></h1>
+    <p class="page-sub">
+      End-to-end design, planning, and supervision of mission-critical technology environments —
+      built to operate reliably under any condition.
+    </p>
+  </div>
+</header>
+
+<!-- ══ STICKY SERVICE NAV ══ -->
+<nav class="services-nav" aria-label="Service sections">
+  <div class="services-nav-inner">
+    <a href="#comms" class="snav-link"><span class="snav-num">01</span> Communication</a>
+    <a href="#security" class="snav-link"><span class="snav-num">02</span> Security &amp; C2</a>
+    <a href="#av" class="snav-link"><span class="snav-num">03</span> AV &amp; Multimedia</a>
+    <a href="#smartcity" class="snav-link"><span class="snav-num">04</span> Smart City</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ══ 01 COMMUNICATION ══ -->
+<section class="service-section" id="comms" aria-labelledby="comms-heading">
+  <div class="service-inner">
+    <div class="service-img-wrap fade-in">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80"
+        alt="Fiber optic and structured cabling infrastructure">
+      <div class="service-img-badge">
+        <div class="service-img-badge-dot"></div>
+        <span>Fiber &amp; Structured Cabling</span>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="service-num">01 - Communication</div>
+      <h2 class="service-title" id="comms-heading">Advanced Communication Infrastructure</h2>
+      <p class="service-desc">
+        Fiber optic networks, structured cabling, and secure communication systems engineered
+        for reliability, speed, and operational continuity. We design and supervise the deployment of communication
+        backbones that organizations in government, defense, and enterprise depend on every day.
+      </p>
+      <div class="service-tags">
+        <span class="tag">Fiber optics</span>
+        <span class="tag">Structured cabling</span>
+        <span class="tag">Secure comms</span>
+        <span class="tag">Network design</span>
+      </div>
+      <div class="capabilities-title">Key Capabilities</div>
+      <div class="capabilities-list">
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Enterprise-grade fiber optic backbone design and deployment</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Structured cabling systems for mission-critical facilities</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Encrypted and secure communication system design and commissioning</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Network redundancy planning and failover architecture</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Full documentation, testing, and commissioning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02 SECURITY & C2 ══ -->
+<section class="service-section" id="security" aria-labelledby="security-heading">
+  <div class="service-inner">
+    <div class="service-img-wrap fade-in">
+      <img src="img-soc.png" alt="Global operations command center with analyst workstations and world map display">
+      <div class="service-img-badge">
+        <div class="service-img-badge-dot"></div>
+        <span>Global Operations Center</span>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="service-num">02 - Security &amp; C2</div>
+      <h2 class="service-title" id="security-heading">Security &amp; Command-and-Control Systems</h2>
+      <p class="service-desc">
+        Integrated surveillance, AI-powered video analytics, emergency management centers,
+        and situational awareness platforms for high-security environments. From a single
+        SOC to a national command center - designed for continuous, uninterrupted operation.
+      </p>
+      <div class="service-tags">
+        <span class="tag">AI video analytics</span>
+        <span class="tag">Video walls</span>
+        <span class="tag">KVM infrastructure</span>
+        <span class="tag">SOC / NOC</span>
+        <span class="tag">Emergency management</span>
+      </div>
+      <div class="capabilities-title">Key Capabilities</div>
+      <div class="capabilities-list">
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>KVM matrix and operator workstation design for C2/SOC/NOC environments</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Integrated surveillance networks with AI-powered video analytics</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Large-format video wall systems for situational awareness</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Emergency operations and crisis management center design</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Redundant architecture - zero downtime under any operational scenario</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03 AV ══ -->
+<section class="service-section" id="av" aria-labelledby="av-heading">
+  <div class="service-inner">
+    <div class="service-img-wrap fade-in">
+      <img src="img-av-room.png" alt="Professional dark boardroom with AV systems and blue LED lighting">
+      <div class="service-img-badge">
+        <div class="service-img-badge-dot"></div>
+        <span>Professional AV Environment</span>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="service-num">03 - AV &amp; Multimedia</div>
+      <h2 class="service-title" id="av-heading">Audio-Visual &amp; Multimedia Systems</h2>
+      <p class="service-desc">
+        Advanced meeting rooms, hybrid collaboration environments, auditoriums, and digital
+        signage - from concept and design through deployment and operation. Every system
+        is engineered around your organization's specific workflow and the people who use it daily.
+      </p>
+      <div class="service-tags">
+        <span class="tag">AV-over-IP</span>
+        <span class="tag">Hybrid rooms</span>
+        <span class="tag">LED walls</span>
+        <span class="tag">Digital signage</span>
+        <span class="tag">Auditoriums</span>
+      </div>
+      <div class="capabilities-title">Key Capabilities</div>
+      <div class="capabilities-list">
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>AV-over-IP system design and project oversight for enterprise and government facilities</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Hybrid collaboration rooms with seamless remote and in-person connectivity</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Large-format LED and projection systems for auditoriums and training facilities</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Digital signage networks for corporate campuses and public spaces</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Operator training and long-term technical support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 04 SMART CITY ══ -->
+<section class="service-section" id="smartcity" aria-labelledby="smartcity-heading">
+  <div class="service-inner">
+    <div class="service-img-wrap fade-in">
+      <img src="img-airport.png" alt="Airport border control with surveillance cameras and monitoring systems">
+      <div class="service-img-badge">
+        <div class="service-img-badge-dot"></div>
+        <span>Border &amp; Urban Intelligence</span>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="service-num">04 - Smart City</div>
+      <h2 class="service-title" id="smartcity-heading">Smart City &amp; Urban Intelligence</h2>
+      <p class="service-desc">
+        Municipal camera networks, AI-driven traffic management, LPR systems, and integrated
+        city operations centers for data-driven urban governance. We transform raw sensor
+        and camera data into real-time, actionable operational intelligence.
+      </p>
+      <div class="service-tags">
+        <span class="tag">600+ cameras</span>
+        <span class="tag">LPR systems</span>
+        <span class="tag">Traffic control</span>
+        <span class="tag">GIS integration</span>
+        <span class="tag">City ops center</span>
+      </div>
+      <div class="capabilities-title">Key Capabilities</div>
+      <div class="capabilities-list">
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>City-scale camera networks with centralized management platforms</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>AI-powered traffic monitoring and license plate recognition (LPR)</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Integrated city operations centers with GIS and data visualization</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Border security infrastructure - perimeter detection and monitoring</span>
+        </div>
+        <div class="cap-item">
+          <div class="cap-dot">
+            <svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4.5,7.5 8,3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Airport, seaport, and transportation hub surveillance coordination</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section" aria-labelledby="cta-heading">
+  <div class="container fade-in">
+    <h2 id="cta-heading">Ready to Start Your Project?</h2>
+    <p>We operate across Africa, the Middle East, Europe, and Turkey.<br>Let's discuss your project.</p>
+    <a href="contact.html" class="btn-white">Get in Touch &rarr;</a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-box">
+          <img src="logo_footer.png" alt="GlobalBridgeOne" class="footer-logo-img">
+        </div>
+        <p class="footer-desc">
+          Advanced Technology Solutions. AV &amp; Multimedia, KVM Command Centers,
+          and Smart City Infrastructure.
+        </p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-links">
+          <a href="https://wa.me/972547700734" target="_blank" rel="noopener">+972 54 770 0734</a>
+          <a href="mailto:info@globalbridgeone.com">info@globalbridgeone.com</a>
+          <a href="https://globalbridgeone.com" target="_blank" rel="noopener">globalbridgeone.com</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-links">
+          <a href="accessibility.html">Accessibility Statement</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 GlobalBridgeOne. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Nav scroll behavior ──
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Fade-in on scroll ──
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // ── Active service nav link on scroll ──
+  const sections = document.querySelectorAll('.service-section[id]');
+  const navLinks = document.querySelectorAll('.snav-link');
+  const snavObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.snav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => snavObserver.observe(s));
+
+  // Mobile nav toggle
+  const mobileBtn = document.querySelector('.nav-mobile-btn');
+  const navMenuLinks = document.querySelector('.nav-links');
+  let menuOpen = false;
+
+  function closeMenu() {
+    menuOpen = false;
+    mobileBtn.setAttribute('aria-expanded', false);
+    mobileBtn.setAttribute('aria-label', 'Open navigation menu');
+    mobileBtn.innerHTML = '&#9776;';
+    navMenuLinks.style.display = 'none';
+  }
+
+  mobileBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuOpen = !menuOpen;
+    mobileBtn.setAttribute('aria-expanded', menuOpen);
+    mobileBtn.setAttribute('aria-label', menuOpen ? 'Close navigation menu' : 'Open navigation menu');
+    mobileBtn.innerHTML = menuOpen ? '&#10005;' : '&#9776;';
+    Object.assign(navMenuLinks.style, menuOpen ? {
+      display: 'flex', flexDirection: 'column',
+      position: 'absolute', top: '100%', left: '0', right: '0', width: '100%',
+      background: 'rgba(12,35,64,.98)',
+      padding: '20px 48px', gap: '18px', zIndex: '9999',
+      borderBottom: '1px solid rgba(14,165,233,.2)'
+    } : { display: 'none' });
+  });
+
+  navMenuLinks?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  document.addEventListener('click', (e) => {
+    if (menuOpen && !navMenuLinks.contains(e.target) && !mobileBtn.contains(e.target)) closeMenu();
+  });
+</script>
+
+</body>
+</html>
