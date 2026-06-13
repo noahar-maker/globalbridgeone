@@ -500,9 +500,9 @@
     nav.style.overflow = menuOpen ? 'visible' : 'hidden';
     Object.assign(navLinks.style, menuOpen ? {
       display: 'flex', flexDirection: 'column',
-      position: 'absolute', top: '64px', left: '0', right: '0',
+      position: 'absolute', top: '100%', left: '0', right: '0', width: '100%',
       background: 'rgba(12,35,64,.98)',
-      padding: '20px 48px', gap: '18px', zIndex: '201',
+      padding: '20px 48px', gap: '18px', zIndex: '9999',
       borderBottom: '1px solid rgba(14,165,233,.2)'
     } : { display: 'none' });
   });
