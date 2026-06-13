@@ -525,17 +525,19 @@
 
   const mobileBtn = document.querySelector('.nav-mobile-btn');
   const navLinks  = document.querySelector('.nav-links');
+  const nav       = document.querySelector('.nav');
   let menuOpen = false;
   mobileBtn?.addEventListener('click', () => {
     menuOpen = !menuOpen;
     mobileBtn.setAttribute('aria-expanded', menuOpen);
     mobileBtn.setAttribute('aria-label', menuOpen ? 'Close navigation menu' : 'Open navigation menu');
     mobileBtn.innerHTML = menuOpen ? '&#10005;' : '&#9776;';
+    nav.style.overflow = menuOpen ? 'visible' : 'hidden';
     Object.assign(navLinks.style, menuOpen ? {
       display: 'flex', flexDirection: 'column',
       position: 'absolute', top: '64px', left: '0', right: '0',
       background: 'rgba(12,35,64,.98)',
-      padding: '20px 48px', gap: '18px', zIndex: '199',
+      padding: '20px 48px', gap: '18px', zIndex: '201',
       borderBottom: '1px solid rgba(14,165,233,.2)'
     } : { display: 'none' });
   });
